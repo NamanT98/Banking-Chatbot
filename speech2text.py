@@ -6,7 +6,7 @@ from vosk import Model, SetLogLevel,KaldiRecognizer
 SetLogLevel(0)
 speech2text_model = Model(lang="en-us")
 sample_rate=44100
-
+text=None
 running = None
 rec=recorder.Recorder(channels=1,rate=sample_rate)
 text_extracter=KaldiRecognizer(speech2text_model,sample_rate)
@@ -22,6 +22,8 @@ def start():
 
 def stop():
     global running
+    global text
+    
     if running is not None:
         running.stop_recording()
         running.close()
@@ -29,6 +31,7 @@ def stop():
         print('Stopped recording')
         text=speech2text(text_extracter)
         print("text extracted")
+        text='extracted'
         return text
     else:
         print('not running')
