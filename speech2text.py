@@ -1,6 +1,7 @@
 import json
 import wave
 import recorder
+import speech_recognition as sr
 from vosk import Model, SetLogLevel,KaldiRecognizer
 
 SetLogLevel(0)
@@ -30,8 +31,7 @@ def stop():
         running = None
         print('Stopped recording')
         text=speech2text(text_extracter)
-        print("text extracted")
-        text='extracted'
+        print(text)
         return text
     else:
         print('not running')
@@ -44,4 +44,16 @@ def speech2text(ext):
             break
         ext.AcceptWaveform(data)
     return json.loads(ext.FinalResult())['text']
+
+r=sr.Recognizer()
+def recognize():
+    with sr.Microphone(device_index=1) as source:
+        print("Listening...")
+        # r.pause_threshold=1
+        r.pause_threshold=0.5
+        audio=r.listen(source)
+
+    query=r.recognize_google(audio,language='en-in')
+    print(query)
+    return query
 
