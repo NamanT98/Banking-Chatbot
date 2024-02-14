@@ -1,3 +1,4 @@
 this is the piper tts
 go through the folders
 Since model size is too large download the model from https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/en/en_US/kusal/medium/en_US-kusal-medium.onnx?download=true
+and place the file in the model folder
